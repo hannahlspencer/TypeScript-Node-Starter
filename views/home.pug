@@ -1,27 +1,49 @@
 extends layout
 
 block content
-  h1 Hackathon Starter
-  p.lead A boilerplate for Node.js web applications.
+  div(class="container-fluid full", style="background-image: url('http://2.bp.blogspot.com/-sHSsVVcarCs/TctdgIhps6I/AAAAAAAAAeY/w5XuUsKQaW4/s1600/southwest-desert-road.jpg')")
+    h1(style="margin-left: 400px") Driving test booker
+    p.lead(style="margin-left: 400px") Book driving tests easily and fast!
   hr
+
   .row
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
+    .col-lg-12
+      div(class="carousel slide", id="carousel-example-generic", data-ride="carousel" )
+        ol(class="carousel-indicators")
+          li(data-target="#carousel-example-generic", data-slide-to="0", class="active")
+          li(data-target="#carousel-example-generic", data-slide-to="1")
+          li(data-target="#carousel-example-generic", data-slide-to="2")
+        
+        div(class="carousel-inner", role="listbox")
+          div(class="item active")
+            .row
+              .col-sm-6
+                h2(style="padding-left: 50px; padding-bottom: 20px") About
+                p(style="padding-left: 30px") If you find it difficult to get a driving test slot, you can use our website to find and book any slots that become available.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tempor, ante et pretium ultrices, leo ante tempor eros, sit amet blandit mauris sapien id nisi. Aenean commodo felis at egestas lobortis. Aenean in tincidunt nibh. Vivamus a nulla iaculis, cursus ante vel, varius est. Maecenas blandit odio at risus tempus, sit amet auctor velit aliquet. Integer ultrices, enim nec sagittis convallis, purus odio pulvinar felis, in accumsan elit metus a nibh. Donec fringilla et erat at efficitur. 
+              .col-sm-6
+                img(src="http://www.reddrivingschool.com/wp-content/uploads/Driving-test_original1.jpg" style="height: 350px", alt="Slide 1")              
+                div(class="carousel-caption")
+          div(class="item ")
+            .row  
+              .col-sm-6
+                div(style="padding-left: 30px") 
+                  h2 Find a booking near you
+                  p Search by location 
+                  p
+                  a(href="#")
+                    img(src="https://lh6.googleusercontent.com/q0CXP6kw9yTiDNkB2pdTQExys_Ih_e0QVb02ITBaZbyeWi_bVTYp_emueJQWp0K9kCaCqorK-kO27zhhQlutXjUxJffpLlcUSDl9ujF_nfRoHiXKJZw" style="width: 300px; margin-left:50px")
+              
+              .col-sm-6
+                h2 Find the next possible booking
+                p Search by date
+                p
+                a(href="#")
+                  img(src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calendar-icon.png" style="width: 225px; margin-left:50px")
+                div(class="carousel-caption") 
+        
+        a(class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev")
+          span(class="fa fa-chevron-left icon-prev" aria-hidden="true")
+          span(class="sr-only") Previous
+        a(class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next")
+          span(class="fa fa-chevron-right icon-next" aria-hidden="true")
+          span(class="sr-only") Next

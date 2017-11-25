@@ -5,7 +5,7 @@ import * as passport from "passport";
 import { default as User, UserModel, AuthToken } from "../models/User";
 import { Request, Response, NextFunction } from "express";
 import { LocalStrategyInfo } from "passport-local";
-import { WriteError } from "mongodb";
+import { WriteError, Code } from "mongodb";
 const request = require("express-validator");
 
 
@@ -79,9 +79,12 @@ export let getSignup = (req: Request, res: Response) => {
  * Create a new local account.
  */
 export let postSignup = (req: Request, res: Response, next: NextFunction) => {
+  req.assert("name", "Name should not be left blank").len({ min: 1 });
   req.assert("email", "Email is not valid").isEmail();
   req.assert("password", "Password must be at least 4 characters long").len({ min: 4 });
   req.assert("confirmPassword", "Passwords do not match").equals(req.body.password);
+  req.assert("postcode", "Post code must be at least 5 characters long").len({min: 5});
+  req.assert("licensenum", "License number must be at least 5 characters long").len({min: 5});
   req.sanitize("email").normalizeEmail({ gmail_remove_dots: false });
 
   const errors = req.validationErrors();
@@ -90,10 +93,15 @@ export let postSignup = (req: Request, res: Response, next: NextFunction) => {
     req.flash("errors", errors);
     return res.redirect("/signup");
   }
+console.log(req.body)
+
 
   const user = new User({
+    name: req.body.name,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    postCode: req.body.postcode,
+    licenseNum: req.body.licensenum,
   });
 
   User.findOne({ email: req.body.email }, (err, existingUser) => {
@@ -119,6 +127,7 @@ export let postSignup = (req: Request, res: Response, next: NextFunction) => {
  * Profile page.
  */
 export let getAccount = (req: Request, res: Response) => {
+
   res.render("account/profile", {
     title: "Account Management"
   });
@@ -129,6 +138,9 @@ export let getAccount = (req: Request, res: Response) => {
  * Update profile information.
  */
 export let postUpdateProfile = (req: Request, res: Response, next: NextFunction) => {
+  req.assert("name", "Name should not be left blank").len({ min: 1 });
+  req.assert("postcode", "Post code must be at least 5 characters long").len({min: 5});
+  req.assert("licensenum", "License number must be at least 5 characters long").len({min: 5});
   req.assert("email", "Please enter a valid email address.").isEmail();
   req.sanitize("email").normalizeEmail({ gmail_remove_dots: false });
 
@@ -143,9 +155,9 @@ export let postUpdateProfile = (req: Request, res: Response, next: NextFunction)
     if (err) { return next(err); }
     user.email = req.body.email || "";
     user.profile.name = req.body.name || "";
-    user.profile.gender = req.body.gender || "";
-    user.profile.location = req.body.location || "";
-    user.profile.website = req.body.website || "";
+    user.postCode = req.body.postcode || "";
+    user.licenseNum = req.body.licensenum || "";
+    user.name = req.body.name || "";
     user.save((err: WriteError) => {
       if (err) {
         if (err.code === 11000) {
@@ -191,12 +203,19 @@ export let postUpdatePassword = (req: Request, res: Response, next: NextFunction
  * Delete user account.
  */
 export let postDeleteAccount = (req: Request, res: Response, next: NextFunction) => {
+  res.render("ConfirmDelete",{title:"ConfirmDelete"});
+};
+
+
+export let postConfirmDelete = (req: Request, res: Response, next: NextFunction) => {
+  
   User.remove({ _id: req.user.id }, (err) => {
     if (err) { return next(err); }
     req.logout();
     req.flash("info", { msg: "Your account has been deleted." });
     res.redirect("/");
   });
+  
 };
 
 /**

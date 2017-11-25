@@ -5,6 +5,9 @@ import * as mongoose from "mongoose";
 export type UserModel = mongoose.Document & {
   email: string,
   password: string,
+  postCode: string,
+  licenseNum: string,
+  name: string,
   passwordResetToken: string,
   passwordResetExpires: Date,
 
@@ -29,10 +32,13 @@ export type AuthToken = {
 };
 
 const userSchema = new mongoose.Schema({
+  name: String,
   email: { type: String, unique: true },
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
+  postCode: String,
+  licenseNum: String,
 
   facebook: String,
   twitter: String,

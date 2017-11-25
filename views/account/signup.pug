@@ -6,6 +6,10 @@ block content
   form.form-horizontal(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group
+      label.col-sm-3.control-label(for='name') Name
+      .col-sm-7
+        input.form-control(type='name', name='name', id='name', placeholder='name', autofocus, required)
+    .form-group
       label.col-sm-3.control-label(for='email') Email
       .col-sm-7
         input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
@@ -18,6 +22,14 @@ block content
       .col-sm-7
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
     .form-group
+      label.col-sm-3.control-label(for='postcode') Post code
+      .col-sm-7
+        input.form-control(type='postcode', name='postcode', id='postcode', placeholder='postcode', autofocus, required)
+    .form-group
+      label.col-sm-3.control-label(for='licensenum') Driver's license number
+      .col-sm-7
+        input.form-control(type='licensenum', name='licensenum', id='licensenum', placeholder='licensenum', autofocus, required)
+    
       .col-sm-offset-3.col-sm-7
         button.btn.btn-success(type='submit')
           i.fa.fa-user-plus
