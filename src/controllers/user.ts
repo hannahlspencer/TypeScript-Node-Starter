@@ -85,7 +85,7 @@ export let postSignup = (req: Request, res: Response, next: NextFunction) => {
   req.sanitize("email").normalizeEmail({ gmail_remove_dots: false });
 
   const errors = req.validationErrors();
-
+  console.log(req);
   if (errors) {
     req.flash("errors", errors);
     return res.redirect("/signup");

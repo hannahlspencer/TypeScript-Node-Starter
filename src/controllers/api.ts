@@ -11,6 +11,7 @@ import { Response, Request, NextFunction } from "express";
  * List of API examples.
  */
 export let getApi = (req: Request, res: Response) => {
+  req.flash("errors", { msg: "something bad happened" });
   res.render("api/index", {
     title: "API Examples"
   });

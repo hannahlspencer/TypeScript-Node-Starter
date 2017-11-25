@@ -42,6 +42,7 @@ import * as passportConfig from "./config/passport";
  * Create Express server.
  */
 const app = express();
+app.use(require("nocache")());
 
 /**
  * Connect to MongoDB.
